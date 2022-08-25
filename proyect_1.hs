@@ -72,3 +72,43 @@ productoria' [] f = 1
 productoria' (x:xs) f = f x * (productoria' xs f)
 
 --ejercicio 5
+paraTodo :: [Bool] -> Bool
+paraTodo xs = paratodo' xs (== True)
+
+-- ejercicio 6
+{--
+Utilizo las funciones del ejercicio 4, programa las funciones por composición,
+sin usar recursión ni análisis por casos.
+--}
+
+-- 6a
+todosPares :: [Int] -> Bool
+todosPares xs = paratodo' xs even
+
+-- 6b
+esMultiplo :: [Int] -> Int -> Bool
+esMultiplo [] z = False
+esMultiplo (x:xs) z = x `mod` z == 0 || esMultiplo xs z
+hayMultiplos :: [Int]-> Int -> Bool
+hayMultiplos xs n = esMultiplo xs n
+
+
+--6c
+sumatoria1 :: [Int] -> Int
+sumatoria1 [] = 0
+sumatoria1 (x:xs) = x*x + sumatoria xs
+
+sumaCuadrados :: Int->Int
+sumaCuadrados n = sumatoria1 [0..n]
+
+--6d
+--63
+
+mispares :: [Int] -> [Int]
+mispares [] = []
+mispares (x:xs) | x `mod` 2 == 0 = x:multpares xs
+                 | otherwise = multpares xs
+
+multpares :: [Int] -> Int
+multpares xs = productoria' xs (mispares xs)
+
