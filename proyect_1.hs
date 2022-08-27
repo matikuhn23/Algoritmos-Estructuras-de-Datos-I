@@ -33,7 +33,7 @@ sumatoria (x:xs) = x + sumatoria xs
 -- fumción que calcula el producto de todos los elementos de una lista
 productoria :: [Int] -> Int
 productoria [] = 1
-productoria (x:xs) = x * sumatoria xs
+productoria (x:xs) = x * productoria xs
 
 -- funcion que toma un entero y retorna su factorial
 factorial :: Int -> Int
@@ -58,7 +58,7 @@ paratodo' (x:xs) f = f x && (paratodo' xs f)
 
 --enunciado b
 existe' :: [a] -> (a -> Bool) -> Bool
-existe' [] f = False
+existe' [] f = False --verifica si todos los elementos de una lista son TRUE
 existe' (x:xs) f = f x || (existe' xs f)
 
 --enunciado c
@@ -102,13 +102,45 @@ sumaCuadrados :: Int->Int
 sumaCuadrados n = sumatoria1 [0..n]
 
 --6d
---63
+factorial' ::(Integer a) => Int -> Int
+factorial' n = product [1...n]
+--6e
 
 mispares :: [Int] -> [Int]
 mispares [] = []
 mispares (x:xs) | x `mod` 2 == 0 = x:multpares xs
-                 | otherwise = multpares xs
+                | otherwise = multpares xs
 
 multpares :: [Int] -> Int
 multpares xs = productoria' xs (mispares xs)
 
+--8a
+duplica :: [Int] -> [Int]
+duplica [] = []
+duplica (x:xs) = x*2:duplica xs
+
+--8b
+duplica' :: [Int] -> [Int]
+duplica' xs = map (*2) duplica' xs
+--9a
+
+sumapares :: [Int] -> Int
+sumapares xs = sumatoria (mispares xs)
+
+--9b
+calculapares' :: [Int] -> [Int]
+calculapares' xs = filter even calculapares' xs
+
+sumapares :: [Int] -> Int
+sumapares xs = sumatoria (calculapares' xs)
+
+--10
+primIgualesA ::  a -> [a] -> [a]
+primIgualesA k xs = takeWhile (== k) primIgualesA xs
+
+primIgualesA' :: Int -> [a] -> [a]
+primIgualesA' n [] = []
+primIgualesA' | xs!n == xs!n-1 = xs!n primIgualesA'
+primIgualesA' | otherwise = primIgualesA
+
+--1
