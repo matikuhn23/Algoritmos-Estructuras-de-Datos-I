@@ -108,11 +108,11 @@ factorial' n = product [1..n]
 
 mispares :: [Int] -> [Int]
 mispares [] = []
-mispares (x:xs) | x `mod` 2 == 0 = x:multpares xs
-                | otherwise = multpares xs
+mispares (x:xs) | x `mod` 2 == 0 = x:mispares xs
+                | otherwise = mispares xs
 
 multpares :: [Int] -> Int
-multpares xs = productoria' xs (mispares xs)
+multpares xs = productoria' (mispares xs) id
 
 --8a
 duplica :: [Int] -> [Int]
@@ -121,7 +121,7 @@ duplica (x:xs) = x*2:duplica xs
 
 --8b
 duplica' :: [Int] -> [Int]
-duplica' xs = map (*2) duplica' xs
+duplica' xs = map (*2) xs
 --9a
 
 sumapares :: [Int] -> Int
@@ -129,24 +129,24 @@ sumapares xs = sumatoria (mispares xs)
 
 --9b
 calculapares' :: [Int] -> [Int]
-calculapares' xs = filter even calculapares' xs
+calculapares' xs = filter even xs
 
 sumapares' :: [Int] -> Int
 sumapares' xs = sumatoria (calculapares' xs)
 
 --10
-primIgualesA ::  a -> [a] -> [a]
-primIgualesA k xs = takeWhile (== k) primIgualesA xs
+primIgualesA :: Eq(a) => a -> [a] -> [a]
+primIgualesA k xs = takeWhile (== k) xs
 
-primIgualesA' :: Int -> [a] -> [a]
+primIgualesA' :: Eq(a) => a -> [a] -> [a]
 primIgualesA' n [] = []
-primIgualesA' n (x:xs) | x == n = x:primIgualesA
+primIgualesA' n (x:xs) | x == n = x:primIgualesA' n xs
                        | otherwise = []
 
 --11a
-primIguales :: [a] -> [a]
+primIguales :: Eq(a) => [a] -> [a]
 primIguales [] = []
 primIguales [a] = [a]
 primIguales (x:y:xs) | x == y = x:(y:primIguales xs)
-                     | otherwise = x
+                     | otherwise = [x]
 --11b
