@@ -62,12 +62,12 @@ existe' [] f = False --verifica si todos los elementos de una lista son TRUE
 existe' (x:xs) f = f x || (existe' xs f)
 
 --enunciado c
-sumatoria' :: [a] -> (a -> Int) -> Int
+sumatoria' :: (Num a) => [a] -> (a -> a) -> a
 sumatoria' [] f = 0
 sumatoria' (x:xs) f = f x + (sumatoria' xs f)
 
 --enunciado d
-productoria' :: [a] -> (a -> Int) -> Int
+productoria' :: (Num a) => [a] -> (a -> a) -> a
 productoria' [] f = 1
 productoria' (x:xs) f = f x * (productoria' xs f)
 
@@ -150,3 +150,19 @@ primIguales [a] = [a]
 primIguales (x:y:xs) | x == y = x:(y:primIguales xs)
                      | otherwise = [x]
 --11b
+primIguales' :: Eq(a) => [a] -> [a]
+primIguales' xs | xs == [] = []
+                | otherwise = primIgualesA' (xs!!0) xs
+
+--12
+cuantGen :: (b -> b -> b) -> b -> [a] -> (a -> b) -> b
+cuantGen op z [] t = z
+cuantGen op z (x:xs) t = op (t x) (cuantGen op z xs t)
+
+sumat xs = cuantGen (+) 0 xs id
+
+produt xs = cuantGen (*) 1 xs id
+
+paratodt xs = cuantGen (&&) True xs id
+
+exist xs = cuantGen (||) False xs id
