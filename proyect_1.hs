@@ -114,6 +114,30 @@ mispares (x:xs) | x `mod` 2 == 0 = x:mispares xs
 multpares :: [Int] -> Int
 multpares xs = productoria' (mispares xs) id
 
+--7
+{--
+(*)La Función map toma una lista xs y aplica una función f a cada elemento de xs
+
+map :: (a -> b) -> [a] -> [b]
+
+map f xs = [f x1, f x2,..., f xn]
+
+Por otro lada, la función filter toma una lista xs y le aplica un condición f,
+retornando la lista ys que contiene a los elementos de xs que cumplen f.
+
+filter :: (a -> Bool) -> [a] -> [a]
+
+Sea xs una lista. Si x cumple la prop f, osea, f.x = True => x:ys,
+
+(*) La expresión map succ [1, -4, 6, 2, -8] es equivalente a
+map (+1) [1, -4, 6, 2, -8]
+
+(*) la expresión filter esPositivo [1, -4, 6, 2, -8] es equivalente a
+filter (=< 0) [1, -4, 6, 2, -8]
+
+--}
+
+
 --8a
 duplica :: [Int] -> [Int]
 duplica [] = []
@@ -166,3 +190,10 @@ produt xs = cuantGen (*) 1 xs id
 paratodt xs = cuantGen (&&) True xs id
 
 exist xs = cuantGen (||) False xs id
+
+
+{--13
+
+13a)  f :: (a, b) -> ...
+      f (x, y) = ...
+--}
