@@ -54,7 +54,7 @@ element' a (x:xs) = x == a || element' a xs
 --enunciado a
 paratodo' :: [a] -> (a -> Bool) -> Bool
 paratodo' [] f = True
-paratodo' (x:xs) f = f x && (paratodo' xs f)
+paratodo' (x:xs) f = (f x) && (paratodo' xs f)
 
 --enunciado b
 existe' :: [a] -> (a -> Bool) -> Bool
@@ -98,12 +98,12 @@ sumatoria1 :: [Int] -> Int
 sumatoria1 [] = 0
 sumatoria1 (x:xs) = x*x + sumatoria xs
 
-sumaCuadrados :: Int->Int
+sumaCuadrados :: Int -> Int
 sumaCuadrados n = sumatoria1 [0..n]
 
 --6d
-factorial' ::(Integer a) => Int -> Int
-factorial' n = product [1...n]
+factorial' :: (Integral a) => a -> a
+factorial' n = product [1..n]
 --6e
 
 mispares :: [Int] -> [Int]
@@ -131,8 +131,8 @@ sumapares xs = sumatoria (mispares xs)
 calculapares' :: [Int] -> [Int]
 calculapares' xs = filter even calculapares' xs
 
-sumapares :: [Int] -> Int
-sumapares xs = sumatoria (calculapares' xs)
+sumapares' :: [Int] -> Int
+sumapares' xs = sumatoria (calculapares' xs)
 
 --10
 primIgualesA ::  a -> [a] -> [a]
@@ -140,7 +140,13 @@ primIgualesA k xs = takeWhile (== k) primIgualesA xs
 
 primIgualesA' :: Int -> [a] -> [a]
 primIgualesA' n [] = []
-primIgualesA' | xs!n == xs!n-1 = xs!n primIgualesA'
-primIgualesA' | otherwise = primIgualesA
+primIgualesA' n (x:xs) | x == n = x:primIgualesA
+                       | otherwise = []
 
---1
+--11a
+primIguales :: [a] -> [a]
+primIguales [] = []
+primIguales [a] = [a]
+primIguales (x:y:xs) | x == y = x:(y:primIguales xs)
+                     | otherwise = x
+--11b
