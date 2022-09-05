@@ -11,8 +11,10 @@ esPositivo :: Int -> Bool
 
 vocales = "aeiou" --Defino la variable que almacena las vocales
 
-{--Función que toma un caracter y una lista y compara los caractes con la cadena 
-de caracteres--}
+{--
+Función que toma un caracter y una lista y compara los caractes con la cadena
+de caracteres
+--}
 element :: Char -> [Char] -> Bool
 element a [] = False
 element a (x:xs) = x == a || element a xs
@@ -55,15 +57,17 @@ element' a (x:xs) = x == a || element' a xs
 
 --Ejercicio 4-------------------------------------------------------------------
 
-{--Función que determina si todos los elementos de una lista satisfacen un
-predicado f--}
+{--
+Función que determina si todos los elementos de una lista satisfacen un
+predicado f
+--}
 paratodo' :: [a] -> (a -> Bool) -> Bool
 paratodo' [] f = True
 paratodo' (x:xs) f = (f x) && (paratodo' xs f)
 
 --Determina si algún elemento de la lista satisface el predicado f
 existe' :: [a] -> (a -> Bool) -> Bool
-existe' [] f = False 
+existe' [] f = False
 existe' (x:xs) f = f x || (existe' xs f)
 
 {--Funcióne que calcula la suma de los valores que resultan de aplicar un
@@ -145,7 +149,8 @@ filter (=< 0) [1, -4, 6, 2, -8]
 
 --Ejercicio 8-------------------------------------------------------------------
 
-{--Función que devuelve la lista que resulta de duplicar daca valor de la lista
+{--
+Función que devuelve la lista que resulta de duplicar daca valor de la lista
 --}
 duplica :: [Int] -> [Int]
 duplica [] = []
@@ -157,8 +162,10 @@ duplica' xs = map (*2) xs
 
 --Ejercicio 9-------------------------------------------------------------------
 
-{--Función que dada una lista de número, calcula la lista que tiene como
-elementos aquellos números que son pares--}
+{--
+Función que dada una lista de número, calcula la lista que tiene como
+elementos aquellos números que son pares
+--}
 sumapares :: [Int] -> Int
 sumapares xs = sumatoria (mispares xs)
 
@@ -173,27 +180,37 @@ sumapares' xs = sumatoria (calculapares' xs)
 --Ejercicio 10------------------------------------------------------------------
 
 {--
+Función que toma un valor y una lista, y calcula el tramo inicial más largo de
+la lista cuyos elementos son iguales a ese valor
 --}
+
+--Por recursión
 primIgualesA :: Eq(a) => a -> [a] -> [a]
 primIgualesA k xs = takeWhile (== k) xs
 
+--utilizando takeWhile
 primIgualesA' :: Eq(a) => a -> [a] -> [a]
 primIgualesA' n [] = []
 primIgualesA' n (x:xs) | x == n = x:primIgualesA' n xs
                        | otherwise = []
 
---11a
+--Ejercicio 11------------------------------------------------------------------
+
+--Por recursión
 primIguales :: Eq(a) => [a] -> [a]
 primIguales [] = []
 primIguales [a] = [a]
 primIguales (x:y:xs) | x == y = x:(y:primIguales xs)
                      | otherwise = [x]
---11b
+
+--LLamando la Función primIgualesA
 primIguales' :: Eq(a) => [a] -> [a]
 primIguales' xs | xs == [] = []
                 | otherwise = primIgualesA' (xs!!0) xs
 
---12
+--Ejercicio 12------------------------------------------------------------------
+
+
 cuantGen :: (b -> b -> b) -> b -> [a] -> (a -> b) -> b
 cuantGen op z [] t = z
 cuantGen op z (x:xs) t = op (t x) (cuantGen op z xs t)
@@ -222,17 +239,24 @@ exist xs = cuantGen (||) False xs id
       la lista en si. Además, no contempla el caso en que la lista es vacia.
 
 
- 13c) Esta mal tipado ya que al ser una lista de tuplas, donde las tuplas son del
- tipo (a,b), la funcion define x:xs f = ... , pero el problema es que x nunca puede
- ser vacio y esto implica que la funcion no puede aceptar el parametro con lista vacia.
+ 13c) f :: [(a,b)] -> ...
+      f (x:xs) = ...
+      Esta bien tipado pero no cubre todos los casos.
+      El caso donde xs es una lista vacio no esta contemplado.
 
 
- 13d)
+ 13d) f :: [(a,b)] -> ...
+      f ((x,y) : ((a,b) : xs))
+      Esta bien tipado pero no cubre todos los casos.
+      El caso donde xs es una lista vacio no esta contemplado
 
 
- 13e) Esta bien tipado ya que la funcion tiene como parametro [(Int,a)] y
-      en la segunda linea se escribio f [(0,a)] = ... donde esto esta perfectamente
-      definido  ya que le paso un Int que es el 0 y un tipo argumento de tipo a.
+ 13e) f :: [(Int, a)] -> ...
+      f [(0, a)] = ...
+      Esta bien tipado ya que la funcion tiene como parametro [(Int,a)] y
+      en la segunda linea se escribio f [(0,a)] = ... donde esto esta
+      perfectamente definido  ya que le paso un Int que es el 0 y un tipo
+      argumento de tipo a.
 
  13f) f :: [(Int, a)] -> ...
       f ((x, 1) : xs) = ...
@@ -246,21 +270,34 @@ exist xs = cuantGen (||) False xs id
 
  13h)f :: (Int -> Int) -> Int ->
      f a 3 = ..
-     La función se encuentra bien tipada, pero al haber fijado el segundo argumento
-     que toma la función, no va a cubrir todos los casos.
+     La función se encuentra bien tipada, pero al haber fijado el segundo
+     argumento que toma la función, no va a cubrir todos los casos.
 
  13i) f :: (Int -> Int) -> Int -> ...
       f 0 1 2 = ...
-      En este caso no se encuentra bien tipada, ya que se encuentra definido un predicado
-      de tipo int y otro argumento de tipo Int, mientras que se encuentran fijos 3 argumentos.
+      En este caso no se encuentra bien tipada, ya que se encuentra definido un
+      predicado de tipo int y otro argumento de tipo Int, mientras que se
+      encuentran fijos 3 argumentos.
 --}
 
-{--14
 
+--Ejercicio 14------------------------------------------------------------------
 
+{--
+a) f :: (a ,b) -> b
+   f (a,b) = b
 
+b) f :: (a, b) -> c
+No podemos dar una definición alternativa. Esta función, como se encuentra
+definida, no nos asegura que se cumpla para todos los posibles casos.
 
+c) f :: (a -> b) -> a -> b
+   f t a = t(a)
 
+d) f :: (a -> b) -> [a] - [b]
+   f t xs = t(xs) --Donde t(xs) es la aplicación de la función map
 
+e) f :: (a -> b) -> (b -> c) -> a -> c
+   f h g a = g(h(a)) --composición de funciónes
 
 --}
