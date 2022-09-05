@@ -107,7 +107,7 @@ hayMultiplos xs n = esMultiplo xs n
 --6c
 sumatoria1 :: [Int] -> Int
 sumatoria1 [] = 0
-sumatoria1 (x:xs) = x*x + sumatoria xs
+sumatoria1 (x:xs) = x*x + sumatoria1 xs
 
 sumaCuadrados :: Int -> Int
 sumaCuadrados n = sumatoria1 [0..n]
