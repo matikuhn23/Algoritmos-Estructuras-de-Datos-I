@@ -199,7 +199,6 @@ primIgualesA' n (x:xs) | x == n = x:primIgualesA' n xs
 --Por recursión
 primIguales :: Eq(a) => [a] -> [a]
 primIguales [] = []
-primIguales [a] = [a]
 primIguales (x:y:xs) | x == y = x:(y:primIguales xs)
                      | otherwise = [x]
 
