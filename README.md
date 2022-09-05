@@ -1,7 +1,9 @@
-# proyect-1-haskell
-Proyecto 1° de Algoritmos y Estructuras de Datos I. FaMAFyC - UNC.
+#Proyectos de Algoritmos y Estructuras de Datos I. FaMAFyC - UNC.
 
-# Algoritmos y Estructuras de Datos I - Laboratorio
+## #Algoritmos y Estructuras de Datos I - Laboratorio
+
+***
+
 ## Proyecto 1
 ###Funciones, tipos y alto orden
 1. Objetivo
@@ -19,3 +21,15 @@ Hacé todo el proyecto en un mismo archivo.
 Usá ghci.
 Comentá el código, indicando a qué ejercicio corresponden las funciones (por ejemplo:-- ejercicio n)
 Nombrá las distintas versiones de una misma función utilizando ’ (por ejemplo: f, f’’, f’’’, . . . )
+
+***
+
+##Proyecto 2
+###Tipos de datos
+
+1. Objetivo
+En este proyecto nos introducimos en la definici ́on de nuestros propios tipos de datos. La importancia
+de poder definir nuevos tipos de datos reside en la facilidad con la que podemos modelar problemas
+y resolverlos usando las mismas herramientas que para los tipos pre-existentes.
+El objetivo de este proyecto es aprender a declarar nuevos tipos de datos en Haskell y definir
+funciones para manipular expresiones que utilizan estos tipos.
