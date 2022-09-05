@@ -1,11 +1,11 @@
-#Proyectos de Algoritmos y Estructuras de Datos I. FaMAFyC - UNC.
+# **Proyectos de Algoritmos y Estructuras de Datos I. FaMAFyC - UNC.**
 
 ## #Algoritmos y Estructuras de Datos I - Laboratorio
 
 ***
 
 ## Proyecto 1
-###Funciones, tipos y alto orden
+### *Funciones, tipos y alto orden*
 1. Objetivo
 El objetivo de este proyecto es revisar la programación de funciones en Haskell, y comenzar a
 introducir algunos conceptos de polimorfismo y funciones de alto orden en los que profundizaremos
@@ -24,8 +24,8 @@ Nombrá las distintas versiones de una misma función utilizando ’ (por ejempl
 
 ***
 
-##Proyecto 2
-###Tipos de datos
+## Proyecto 2
+### *Tipos de datos*
 
 1. Objetivo
 En este proyecto nos introducimos en la definici ́on de nuestros propios tipos de datos. La importancia
