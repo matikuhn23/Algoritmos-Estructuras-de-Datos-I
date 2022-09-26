@@ -86,11 +86,11 @@ filt_doc [] c = 0
 filt_doc xs c = length (filter (misma_per_carg c) xs)
 
 {--
-ejercicio 5
+ejercicio 5---------------------------------------------------------------------
 --}
 
-data Alteracion = Bemol | Sostenido | Natural deriving (Eq, Ord)
-data NotaMusical = Nota NotaBasica Alteracion deriving (Eq, Ord)
+data Alteracion = Bemol | Sostenido | Natural
+data NotaMusical = Nota NotaBasica Alteracion
 
 sonido :: NotaBasica -> Int
 sonido Do = 1
@@ -117,7 +117,7 @@ instance Ord NotaMusical
       sonidoCromatico (Nota n v) <= sonidoCromatico (Nota m b)
 
 {--
-ejercicio 6
+ejercicio 6---------------------------------------------------------------------
 --}
 
 
@@ -126,27 +126,80 @@ primerElemento [] = Nothing
 primerElemento (x:xs) = Just (x)
 
 {--
-Ejercicio 7
+Ejercicio 7---------------------------------------------------------------------
 --}
 
 data Cola = Vacia | Encolada Persona Cola
 
-Encolada Decane (Encolada (Docente Titular) (Encolada (Docente Titular) Vacia))
+--Encolada Decane (Encolada (Docente Titular) (Encolada (Docente Titular) Vacia))
 
 atender :: Cola -> Maybe Cola
 atender Vacia = Nothing
-atender Encolada p r = Just (r)
+atender (Encolada p r) = Just(r)
 
 encolar :: Persona -> Cola -> Cola
 encolar p Vacia = Encolada p Vacia
 encolar p (Encolada r cs) =  Encolada r (encolar p cs)
 
 busca :: Cola -> Cargo -> Maybe Persona
-busca Encolada Vacia c = Nothing
+busca Encolada (Vacia c) = Nothing
 busca (Encolada Docente c1 cs) c | mismoCargo c c1 = Just(Docente c1)
                                  | otherwise = Busca cs c
 
 
 {--
-Ejercicio 8
+Ejercicio 8---------------------------------------------------------------------
+
+# Encontrar la definición de una palabra  en un diccionario
+# Encontrar el lugar de votación de una personas
+
+type Diccionario = ListaAsoc String String
+type Padron = ListaAsoc Int String
 --}
+data ListaAsoc a b = Vaciaa | Nodo a b (ListaAsoc a b)
+
+{--a
+¿Como se debe instanciar el tipo ListaAsoc para representar la informacion
+almacenada en una guıatelefonica
+
+type guiaTelfon = ListaAsoc String String Int
+
+donde un string corresponde a la dirección, el otro string al nombre y el Int
+al número de telefono respectivamente
+--}
+
+
+-- 1b) Función que devuelve la cantidad de datos de una Lista
+la_long :: ListaAsoc a  b -> Int
+la_long Vaciaa = 0
+la_long (Nodo f e as) = 1 + la_long as
+
+-- 2b)que devuelve la concatenacion de dos listas de asociacion
+la_concat :: ListaAsoc a b -> ListaAsoc a b -> ListaAsoc a b
+la_concat Vaciaa x = x
+la_concat z Vaciaa = z
+la_concat (Nodo f e as) laotralista = (Nodo f e) la_concat (as laotralista)
+
+
+-- 3b)que agrega un nodo a la lista de asociaciones.
+la_agregar :: ListaAsoc a b -> a -> b -> ListaAsoc a b
+la_agregar Vaciaa y z  = Nodo a b Vaciaa
+la_agregar (Nodo f e as) j k  = (Nodo f e) la_agregar as j k
+
+-- 4b)que transforma una lista de asociacion en una lista de pares clave-dato.
+la_pares :: ListaAsoc a b -> [(a, b)]
+la_pares Vaciaa = []
+la_pares (Nodo f e as) = (f, e):la_pares as
+
+{-- 5b)que dada una lista y una clave devuelve el dato asociado,
+si es que existe. En caso contrario devuelve Nothing.--}
+la_busca :: Eq a => ListaAsoc a b -> a -> Maybe b
+la_busca Vaciaa z = Nothing
+la_busca (Nodo f e as) g | (f==g) = Just(b)
+                         | otherwise = la_busca g as
+
+-- 6b)que dada una clave a elimina la entrada en la lista.
+la_borrar :: Eq a => a -> ListaAsoc a b -> ListaAsoc a b
+la_borrar a Vaciaa = Vaciaa
+la_borrar a (Nodo f e as) | (a==f) = la_borrar a as
+                          | otherwise = Nodo f e la_borrar a as
