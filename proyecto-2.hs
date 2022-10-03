@@ -203,3 +203,33 @@ la_borrar :: Eq a => a -> ListaAsoc a b -> ListaAsoc a b
 la_borrar a Vaciaa = Vaciaa
 la_borrar a (Nodo f e as) | (a==f) = la_borrar a as
                           | otherwise = Nodo f e la_borrar a as
+
+
+---ejercicios arboles
+data Arbol a = | Rama (Arbol a) a (Arbol a)
+
+-- func que dado un arbol devuelve la cantidad de datos almacenados
+a_long Hoja = 0
+a_long (Rama a _ b) = 1 + a_long a + a_long b
+
+-- función que dado un árbol devuelve la cantidad de hojas
+b_hojas :: Arbol a -> Int
+b_hojas Hoja = 1
+b_hojas (Rama a _ b) = b_hojas a + b_hojas b
+
+-- función que dado un árbol que contiene números, los incrementa en uno
+a_inc :: Num a => Arbol a -> Arbol a
+a_inc Hoja = Hoja
+a_inc (Rama a n b) = Rama (a_inc a) (n + 1) (a_inc b)
+
+-- función que dada una función y un árbol, devuelve el árbol con la misma estructura, que resulta de aplicar la función a cada uno de lso elementos del árbol.
+--revisar la función anterior y reprogramarla
+a_map :: (a -> b) -> Arbol a -> Arbol b
+a_map _ Hoja = Hoja
+a_map fun (Rama a x b) = Rama (a_map fun a) (fun x) (a_map fun b)
+
+a_min :: Ord a => Arbol a -> a
+a_min (Rama Hoja n1 Hoja) = n1
+a_min (Rama a1 n1 Hoja) = min n1 (a_min a1)
+a_min (Rama Hoja n1 a2) = min n1 (a_min a2)
+a_min (Rama a1 n1 a2) = min n1 (min (a_min a1) (a_min a2))
