@@ -33,3 +33,20 @@ de poder definir nuevos tipos de datos reside en la facilidad con la que podemos
 y resolverlos usando las mismas herramientas que para los tipos pre-existentes.
 El objetivo de este proyecto es aprender a declarar nuevos tipos de datos en Haskell y definir
 funciones para manipular expresiones que utilizan estos tipos.
+
+***
+# **Programación imperativa - Programas como transformadores de estados**
+1.
+## *Objetivo*
+El objetivo de este proyecto es introducir
+el concepto de estado y de programas como transformadores de estado;
+el modelo computacional imperativo, y sus diferencias con el modelo funcional;
+la implementación en lenguaje “C” de programas imperativos vistos en el teórico-práctico.
+2.
+## *Lenguaje “C”*
+A lo largo de todo el proyecto, se utilizará el lenguaje C, y algunas herramientas como el
+GDB: The GNU Project Debugger, para ayudar a la comprensión del concepto de estado y
+del paradigma imperativo.
+En el caso del lenguaje “C”, para poder ejecutar un programa, lo vamos a tener que “compilar”, y
+de esa manera generamos un archivo binario que podrá ser ejecutado en la computadora.
+
