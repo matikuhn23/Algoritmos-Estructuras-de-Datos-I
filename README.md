@@ -50,3 +50,11 @@ del paradigma imperativo.
 En el caso del lenguaje “C”, para poder ejecutar un programa, lo vamos a tener que “compilar”, y
 de esa manera generamos un archivo binario que podrá ser ejecutado en la computadora.
 
+
+# **Proyecto 4 del Laboratorio**
+##Programación imperativa en C.
+El objetivo del proyecto es:
+###Extender los conceptos relacionados con el deasrrollo de porgramas en lenguaje C en base al formalismo visto en el teórico/práctico de la materia.
+###Introducir el uso de la librería assert.h para garantizar el cumplimiento de estados.
+###Familiarizarse con el uso de Arreglos en el lenguaje "C";
+###definir tipos abstractos nuevos básicos, utilizando el comando struct.
